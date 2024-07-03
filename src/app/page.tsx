@@ -31,25 +31,37 @@ const myApproach = [
       "This is where the magic happens! Based on the approved design, I'll translate everything into functional code, building your website from the ground up.",
   },
 ];
-const DummyContent = () => {
-  return (
-    <Image
-      src="/observatory.jpg"
-      alt="dummy image"
-      width="1000"
-      height="1000"
-      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
-    />
-  );
-};
+
 const tabs = [
   {
     title: "HR Dashboard",
     value: "HR Dashboard",
     content: (
-      <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-        <p>HR Dashboard</p>
-        <DummyContent />
+      <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 md:p-10 text-lg md:text-2xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 space-y-4">
+        <p className="text-2xl md:text-4xl">
+          HR Dashboard: Streamlining Workforce Management
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+          <li>
+            Engineered a cutting-edge HR management app using Next.js,
+            revolutionizing employee oversight.
+          </li>
+          <li>
+            Leveraged Zustand for efficient global state management, ensuring
+            seamless data flow across components.
+          </li>
+          <li>
+            Implemented MongoDB for robust, scalable data storage and retrieval.
+          </li>
+          <li>
+            Developed comprehensive CRUD operations, empowering HR professionals
+            with full control over employee data.
+          </li>
+          <li>
+            Crafted reusable components, significantly reducing development time
+            and enhancing code maintainability.
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -57,9 +69,28 @@ const tabs = [
     title: "Crypto Staking App",
     value: "Crypto Staking App",
     content: (
-      <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-        <p>Crypto Staking App</p>
-        <DummyContent />
+      <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 md:p-10 text-lg md:text-2xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 space-y-4">
+        <p className="text-2xl md:text-4xl">
+          Crypto Staking App: Empowering Digital Asset Growth
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+          <li>
+            Architected a sophisticated crypto staking platform using Next.js,
+            showcasing modern web development expertise.
+          </li>
+          <li>
+            Innovated by creating two custom cryptocurrencies based on BNB,
+            demonstrating blockchain proficiency.
+          </li>
+          <li>
+            Engineered a secure and efficient staking contract using Web3
+            technologies, enabling users to maximize their crypto holdings.
+          </li>
+          <li>
+            Integrated MetaMask for seamless, user-friendly wallet connectivity,
+            prioritizing security and ease of use.
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -67,9 +98,28 @@ const tabs = [
     title: "Adexports",
     value: "Adexports",
     content: (
-      <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-        <p>Adexports</p>
-        <DummyContent />
+      <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 md:p-10 text-lg md:text-2xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 space-y-4">
+        <p className="text-2xl md:text-4xl">
+          Adexports: Revolutionizing International Trade
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+          <li>
+            Developed a comprehensive export management system, streamlining
+            global trade processes.
+          </li>
+          <li>
+            Implemented robust features for inventory tracking, order
+            management, and customs documentation.
+          </li>
+          <li>
+            Utilized Django&apos;s powerful ORM for efficient database
+            operations and complex queries.
+          </li>
+          <li>
+            Integrated real-time currency conversion and shipping cost
+            calculation APIs for accurate pricing.
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -77,9 +127,32 @@ const tabs = [
     title: "Capabara",
     value: "Capabara",
     content: (
-      <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-        <p>Capabara</p>
-        <DummyContent />
+      <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 md:p-10 text-lg md:text-2xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 space-y-4">
+        <p className="text-2xl md:text-4xl">
+          Capabara: AI-Powered Subscription Management
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+          <li>
+            Engineered a versatile platform offering subscription management and
+            cutting-edge AI services for organizations.
+          </li>
+          <li>
+            Implemented Single Sign-On (SSO) using Django OAuth Toolkit,
+            enhancing security and user experience.
+          </li>
+          <li>
+            Mastered state management techniques to maintain a consistent and
+            responsive application state.
+          </li>
+          <li>
+            Developed efficient API integration, ensuring seamless data flow and
+            real-time updates.
+          </li>
+          <li>
+            Designed an intuitive navigation system with advanced URL routing
+            for optimal user experience.
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -87,9 +160,28 @@ const tabs = [
     title: "Neemiya",
     value: "Neemiya",
     content: (
-      <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-        <p>Neemiya</p>
-        <DummyContent />
+      <div className="w-full overflow-hidden relative h-full rounded-2xl p-6 md:p-10 text-lg md:text-2xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 space-y-4">
+        <p className="text-2xl md:text-4xl">
+          Neemiya: Empowering Creativity with No-Code Website Building
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+          <li>
+            Spearheaded the development of an innovative no-code website
+            builder, democratizing web design.
+          </li>
+          <li>
+            Crafted an intuitive and responsive UI, prioritizing user experience
+            and accessibility.
+          </li>
+          <li>
+            Implemented a robust global error management system, ensuring smooth
+            operation and user confidence.
+          </li>
+          <li>
+            Engineered seamless API integrations, expanding the platform&apos;s
+            capabilities and third-party service connectivity.
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -97,8 +189,8 @@ const tabs = [
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen min-w-screen bg-black flex-col items-center justify-between">
-      <div className="mx-auto max-w-screen rounded-md h-[40rem] overflow-hidden">
+    <main className="flex bg-black flex-col items-center justify-between">
+      <div className="mx-auto rounded-md h-[40rem] overflow-hidden">
         <Vortex
           backgroundColor="black"
           className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full"
@@ -150,13 +242,14 @@ export default function Home() {
         <Tabs tabs={tabs} />
       </div>
 
-      <div className=" rounded-md flex flex-col w-screen antialiased  dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+      <div className="flex flex-col w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 antialiased dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden rounded-md">
         <InfiniteMovingCards
           items={testimonials}
           direction="right"
           speed="slow"
         />
       </div>
+
       <div className="h-[40rem] w-full rounded-md  relative flex flex-col items-center justify-center antialiased">
         <div className="max-w-4xl mx-auto p-4">
           <h1 className="relative z-10 text-lg md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold">

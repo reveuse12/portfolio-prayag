@@ -1,15 +1,17 @@
+"use client";
 import Grid from "@/components/Grid";
-import { Navbar } from "@/components/Navbar";
 import { Vortex } from "@/components/Vortex";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button } from "@/components/ui/button";
 import { GlareCard } from "@/components/ui/glare-card";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { testimonials } from "./data";
-import MagicButton from "@/components/ui/MagicButton";
 import { Tabs } from "@/components/ui/tabs";
-import Image from "next/image";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
+import { z } from "zod";
 
 const myApproach = [
   {
@@ -186,8 +188,96 @@ const tabs = [
     ),
   },
 ];
+interface SubmitQuery {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface ValidationErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
+const submitQuerySchema = z.object({
+  name: z.string().min(3, { message: "Name must be at least 3 characters" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  message: z
+    .string()
+    .min(10, { message: "Message must be at least 10 characters" }),
+});
+
+const validateFormData = (data: SubmitQuery) => {
+  try {
+    submitQuerySchema.parse(data);
+    return { isValid: true, errors: {} as ValidationErrors };
+  } catch (error: any) {
+    const errors: ValidationErrors = error.errors.reduce(
+      (acc: ValidationErrors, err: any) => {
+        acc[err.path[0] as keyof ValidationErrors] = err.message;
+        return acc;
+      },
+      {}
+    );
+    return { isValid: false, errors };
+  }
+};
 
 export default function Home() {
+  const [submitQuery, setSubmitQuery] = useState<SubmitQuery>({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState<ValidationErrors>({});
+
+  const { toast } = useToast();
+
+  const handleSubmitQuery = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const { isValid, errors } = validateFormData(submitQuery);
+
+    if (!isValid) {
+      setErrors(errors);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/sendmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submitQuery),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Your response is submitted",
+          description: "Thank you! We will get back to you",
+        });
+      } else {
+        toast({
+          title: "Something went wrong",
+          description: "Please try again later",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem with your submission",
+      });
+    }
+  };
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setSubmitQuery((prevQuery) => ({ ...prevQuery, [name]: value }));
+  };
   return (
     <main className="flex bg-black flex-col items-center justify-between">
       <div className="mx-auto rounded-md h-[40rem] overflow-hidden">
@@ -262,33 +352,48 @@ export default function Home() {
             to you as soon as possible. Thank you for your interest in our
             services. Have a great day!
           </p>
-          <input
-            type="text"
-            placeholder=""
-            className="rounded-lg border text-white border-neutral-800 focus:ring-2 focus:ring-yellow-900 w-full relative z-10 mt-4 bg-neutral-950 placeholder:text-neutral-700 px-4 py-2 text-sm md:text-base"
-          />
-          <div className=" flex justify-center mt-4 text-center">
-            <MagicButton
-              icon={
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1.20308 1.04312C1.00481 0.954998 0.772341 1.0048 0.627577 1.16641C0.482813 1.32802 0.458794 1.56455 0.568117 1.75196L3.92115 7.50002L0.568117 13.2481C0.458794 13.4355 0.482813 13.672 0.627577 13.8336C0.772341 13.9952 1.00481 14.045 1.20308 13.9569L14.7031 7.95693C14.8836 7.87668 15 7.69762 15 7.50002C15 7.30243 14.8836 7.12337 14.7031 7.04312L1.20308 1.04312ZM4.84553 7.10002L2.21234 2.586L13.2689 7.50002L2.21234 12.414L4.84552 7.90002H9C9.22092 7.90002 9.4 7.72094 9.4 7.50002C9.4 7.27911 9.22092 7.10002 9 7.10002H4.84553Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              }
-              title="Let's get in touch"
-              position="right"
-            />
-          </div>
+          <form
+            onSubmit={handleSubmitQuery}
+            className="relative space-y-4 rounded-xl bg-zinc-900 p-6 shadow-lg"
+          >
+            <div>
+              <Input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={submitQuery.name}
+                onChange={handleChange}
+                className="w-full"
+              />
+              {errors.name && <p className="text-red-500">{errors.name}</p>}
+            </div>
+            <div>
+              <Input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={submitQuery.email}
+                onChange={handleChange}
+                className="w-full"
+              />
+              {errors.email && <p className="text-red-500">{errors.email}</p>}
+            </div>
+            <div>
+              <Textarea
+                name="message"
+                placeholder="Your Message"
+                value={submitQuery.message}
+                onChange={handleChange}
+                className="w-full"
+              />
+              {errors.message && (
+                <p className="text-red-500">{errors.message}</p>
+              )}
+            </div>
+            <Button type="submit" className="w-full">
+              Send
+            </Button>
+          </form>
         </div>
         <BackgroundBeams />
       </div>

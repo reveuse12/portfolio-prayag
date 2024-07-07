@@ -352,18 +352,17 @@ export default function Home() {
             to you as soon as possible. Thank you for your interest in our
             services. Have a great day!
           </p>
-          <form
-            onSubmit={handleSubmitQuery}
-            className="relative space-y-4 rounded-xl bg-zinc-900 p-6 shadow-lg"
-          >
+
+          <form onSubmit={handleSubmitQuery}>
             <div>
               <Input
                 type="text"
                 name="name"
-                placeholder="Your Name"
+                placeholder="Name"
                 value={submitQuery.name}
                 onChange={handleChange}
-                className="w-full"
+                required
+                className="rounded-lg border text-white border-neutral-800 focus:ring-2 focus:ring-yellow-900 w-full relative z-10 mt-4 bg-neutral-950 placeholder:text-neutral-700 px-4 py-2 text-sm md:text-base"
               />
               {errors.name && <p className="text-red-500">{errors.name}</p>}
             </div>
@@ -371,28 +370,30 @@ export default function Home() {
               <Input
                 type="email"
                 name="email"
-                placeholder="Your Email"
+                placeholder="Email"
                 value={submitQuery.email}
                 onChange={handleChange}
-                className="w-full"
+                required
+                className="rounded-lg border text-white border-neutral-800 focus:ring-2 focus:ring-yellow-900 w-full relative z-10 mt-4 bg-neutral-950 placeholder:text-neutral-700 px-4 py-2 text-sm md:text-base"
               />
               {errors.email && <p className="text-red-500">{errors.email}</p>}
             </div>
             <div>
               <Textarea
                 name="message"
-                placeholder="Your Message"
+                placeholder="Message"
                 value={submitQuery.message}
                 onChange={handleChange}
-                className="w-full"
+                required
+                className="rounded-lg border text-white border-neutral-800 focus:ring-2 focus:ring-yellow-900 w-full relative z-10 mt-4 bg-neutral-950 placeholder:text-neutral-700 px-4 py-2 text-sm md:text-base"
               />
               {errors.message && (
                 <p className="text-red-500">{errors.message}</p>
               )}
             </div>
-            <Button type="submit" className="w-full">
-              Send
-            </Button>
+            <div className="flex justify-center relative mt-4 z-10 text-center">
+              <Button type="submit">Submit</Button>
+            </div>
           </form>
         </div>
         <BackgroundBeams />
